@@ -20,9 +20,9 @@ export default function Home() {
             <p>Back to home-page</p>
           </a>
 
-          <a href="/projects" className={styles.card}>
-            <h3>Projects &rarr;</h3>
-            <p>Have a look to my projects</p>
+          <a href="/slides" className={styles.card}>
+            <h3>Slides &rarr;</h3>
+            <p>Presentations I made</p>
           </a>
 
           <a href="/cv" className={styles.card}>
