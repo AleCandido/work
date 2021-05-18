@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-ghpages:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 2
+      fail-fast: false
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          token: ${{ secrets.PUBLISH_SITE }}
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # will run `yarn install` command
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: deploy # will run `yarn build` command
+      #- name: Install dependencies 📦
+      #run: |
+      #sudo apt install yarn
+      #yarn install
+      #- name: Build 🔨
+      #run: |
+      #yarn deploy
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.PUBLISH_SITE }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: "out" # The folder the action should deploy.
